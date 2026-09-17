@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "demo": true,
+  "profile": {"name": "林同学（虚构示例）", "major": "机械工程（示例）", "entry_year": 2025, "graduation_year": 2029, "interests": ["结构设计", "机器人"], "intention": "探索中"},
+  "records": [
+    {
+      "id": "demo-record-1", "title": "课程项目：小型夹持机构（虚构）", "kind": "课程项目", "occurred": "2026-06", "recorded_at": "2026-06-20T15:00:00+08:00", "raw": "这次课程项目，我负责夹持机构的三维建模和装配检查，和同学一起完成了样机。还没有整理夹持力的数据。", "usage": "resume", "tags": ["课程项目", "建模", "虚构演示"],
+      "facts": [{"id": "demo-fact-1", "text": "在课程项目中负责夹持机构三维建模及装配检查；样机由团队共同完成。", "status": "reported", "evidence_ids": []}],
+      "pending": ["补充课程报告和建模文件", "整理测量条件与原始结果"], "evidence": [], "corrections": []
+    },
+    {
+      "id": "demo-record-2", "title": "第一次参加社团工作坊（虚构）", "kind": "兴趣探索", "occurred": "2025-10", "recorded_at": "2025-10-15T18:00:00+08:00", "raw": "今天发现自己更喜欢亲手调整结构，而不只是看展示。先记下来，暂时不用写进简历。", "usage": "private", "tags": ["兴趣", "个人回顾"], "facts": [], "pending": [], "evidence": [], "corrections": []
+    }
+  ],
+  "jobs": [{"id": "demo-job-1", "title": "结构设计实习生（虚构）", "company": "演示机构，非真实招聘", "source_url": "", "captured_at": "2026-06-20（示例）", "verified_at": null, "status": "仅演示字段，非在招信息", "graduation_requirement": "未设定", "education_requirement": "未设定", "hc": null, "requirements": ["演示需求：能够说明结构设计过程与装配问题"]}],
+  "actions": [{"title": "把已有课程项目整理为一份能复查的成果", "basis": "探索假设：检验自己是否喜欢结构设计；不代表真实招聘市场结论", "gap": "有建模经历，缺少归档证据与测量口径", "task": "整理装配截图和原始文件，写清个人职责、遇到的问题和解决过程。", "effort": "估算 2—4 小时，按材料现状调整", "deliverable": "一页项目复盘、建模原文件和关键截图", "acceptance": "能解释一个装配问题，能打开原文件，能区分个人工作和团队结果", "status": "待开始（虚构演示）"}],
+  "resume": {"direction": "结构设计方向探索（虚构演示）", "summary": "", "bullets": [{"text": "在课程项目中负责小型夹持机构的三维建模及装配检查，与团队共同完成样机。", "fact_ids": ["demo-fact-1"]}]}
+}

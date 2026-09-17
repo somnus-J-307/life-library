@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+.tmp/
+.venv/
+dist/
+demo-output/
+life-library-data/
+**/evidence/
+**/snapshots/
+**/library.json
+**/resume.md
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db
