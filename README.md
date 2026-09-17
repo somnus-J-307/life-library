@@ -4,7 +4,9 @@
 
 人生库是一个给 AI 助手使用的 Skill。你负责讲述，助手帮你保存原始记录、归档证据、整理可追溯的简历素材，并结合专业、兴趣和岗位资料讨论下一步。
 
-**当前版本：v0.1.0-beta.1。** 适合愿意通过 AI 助手管理本地资料的学生。它不是独立 App，也不是打开网页就能录入的在线服务。
+**当前版本：v0.1.0-beta.2。** 适合愿意通过 AI 助手管理本地资料的学生。它不是独立 App，也不是打开网页就能录入的在线服务。
+
+**[下载 WorkBuddy 技能包](https://github.com/somnus-J-307/life-library/releases/download/v0.1.0-beta.2/life-library-workbuddy.zip)** · [WorkBuddy 安装说明](docs/workbuddy.md) · [Codex 安装](#安装到-codex) · [竞品调研与定位](docs/competitive-landscape.md)
 
 ## 四句话开始
 
@@ -29,6 +31,14 @@
 本地页面包含时间线、搜索、当前简历和下一步。每次助手更新资料后重新生成；已保存的简历版本不会随新草稿改变。
 
 ![完全虚构的演示资料页面](docs/preview.png)
+
+## 安装到 WorkBuddy
+
+下载上面的 **WorkBuddy 专用 ZIP**，在 WorkBuddy 中打开「技能 / Skills → 添加技能 → 上传技能」，导入后确认已启用，再直接说「使用人生库，记一条……」。无需运行 Codex 安装器。入口依据 [WorkBuddy 官方说明](https://www.workbuddy.cn/docs/workbuddy/From-Beginner-to-Expert-Guide/Function-Description/Skills-Market)；本项目未上架官方技能市场。
+
+归档和页面生成需要 WorkBuddy 能调用 Python 3.10+。已验证包结构及解压后脚本，**尚未完成 WorkBuddy 桌面端导入与对话实测**。详见[运行条件与首次使用](docs/workbuddy.md)。
+
+供下载页面使用的[静态 JSON 接口](https://raw.githubusercontent.com/somnus-J-307/life-library/main/downloads/workbuddy.json)提供版本、下载地址和 SHA-256；它是本项目的下载信息，不是 WorkBuddy 官方 API。当前下载托管在 GitHub，尚无国内镜像。
 
 ## 安装到 Codex
 
@@ -115,7 +125,7 @@ python -X utf8 tools/test_distribution.py
 python -X utf8 tools/build.py
 ```
 
-构建使用明确的文件清单，不收集你的资料、缓存或测试输出。产物在 `dist/`，包含附安装器的 ZIP、仅含 Skill 的 `.skill` 文件和 SHA-256 清单。`.skill` 本质是 ZIP，不承诺所有客户端都支持直接导入；Codex 用户按上面的 ZIP 安装步骤操作。
+构建使用明确的文件清单，不收集你的资料、缓存或测试输出。产物在 `dist/`，包含通用安装 ZIP、仅含 Skill 的 `.skill`、WorkBuddy 专用 ZIP、下载信息 JSON 和 SHA-256 清单。`.skill` 本质是 ZIP，不承诺所有客户端都支持直接导入；WorkBuddy 用户选择 `life-library-workbuddy.zip`，Codex 用户按上面的 ZIP 安装步骤操作。
 
 遇到问题请在 [Issues](https://github.com/somnus-J-307/life-library/issues) 说明操作、预期和实际结果，使用脱敏或虚构资料复现，勿附真实证书、身份证或完整人生库。欢迎先反馈“第一次使用卡在哪里”。
 

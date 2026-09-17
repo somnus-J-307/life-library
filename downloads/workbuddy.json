@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "skill": "life-library",
+  "display_name": "人生库",
+  "platform": "workbuddy",
+  "version": "0.1.0-beta.2",
+  "prerelease": true,
+  "install_method": "local_zip_import",
+  "download_url": "https://github.com/somnus-J-307/life-library/releases/download/v0.1.0-beta.2/life-library-workbuddy.zip",
+  "sha256": "a822637ac8acebac2faa9b0361b550f615da334c1dfa9987f53dfc1fdc2d1edf",
+  "size_bytes": 16716,
+  "instructions_url": "https://github.com/somnus-J-307/life-library/blob/main/docs/workbuddy.md",
+  "validation": {
+    "package_and_scripts": "automated",
+    "desktop_import": "not_tested"
+  }
+}

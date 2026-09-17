@@ -62,6 +62,44 @@ class DistributionTest(unittest.TestCase):
         self.assertNotIn('今天发现自己更喜欢', (demo_root / 'resume.md').read_text(encoding='utf-8'))
         self.assertEqual(json.loads((data_root / 'library.json').read_text(encoding='utf-8'))['records'], [])
 
+    def test_workbuddy_zip_metadata_and_runtime(self):
+        sandbox = build.ROOT / '.tmp' / ('workbuddy-' + uuid.uuid4().hex)
+        sandbox.mkdir(parents=True)
+        build.build(sandbox / 'dist')
+        package = sandbox / 'dist/life-library-workbuddy.zip'
+        feed = json.loads((sandbox / 'dist/workbuddy.json').read_text(encoding='utf-8'))
+        self.assertEqual(feed['sha256'], hashlib.sha256(package.read_bytes()).hexdigest())
+        self.assertEqual(feed['size_bytes'], package.stat().st_size)
+        version = (build.ROOT / 'VERSION').read_text().strip()
+        self.assertEqual(feed['version'], version)
+        self.assertIn('/v' + version + '/', feed['download_url'])
+        self.assertEqual(feed['validation']['desktop_import'], 'not_tested')
+        installed = sandbox / 'workbuddy skill'
+        with zipfile.ZipFile(package) as z:
+            expected = {name.removeprefix('skills/life-library/') for name in build.FILES if name.startswith('skills/life-library/')}
+            self.assertEqual(set(z.namelist()), expected)
+            entrypoint = z.read('SKILL.md').decode('utf-8')
+            header, body = entrypoint[4:].split('\n---\n', 1)
+            fields = {key: json.loads(value.strip()) for key, value in (line.split(':', 1) for line in header.splitlines())}
+            for key in ('description', 'description_zh', 'description_en', 'version', 'author'):
+                self.assertTrue(fields[key])
+            self.assertEqual(fields['version'], version)
+            self.assertEqual(fields['name'], 'life-library')
+            self.assertEqual(body, (build.ROOT / 'skills/life-library/SKILL.md').read_text(encoding='utf-8')[4:].split('\n---\n', 1)[1])
+            for name in z.namelist():
+                if name != 'SKILL.md':
+                    self.assertEqual(z.read(name), (build.ROOT / 'skills/life-library' / name).read_bytes())
+            z.extractall(installed)
+        script = installed / 'scripts/library.py'
+        data_root = sandbox / '私人资料'
+        for command in ('init', 'check', 'render'):
+            result = subprocess.run([sys.executable, '-X', 'utf8', str(script), command, '--root', str(data_root)], capture_output=True)
+            self.assertEqual(result.returncode, 0, result.stderr.decode('utf-8', errors='replace'))
+        self.assertTrue((data_root / 'index.html').is_file())
+        # Exercise attachment copying, evidence restrictions and frozen snapshots using the extracted package itself.
+        result = subprocess.run([sys.executable, '-X', 'utf8', str(installed / 'scripts/test_library.py')], cwd=sandbox, capture_output=True)
+        self.assertEqual(result.returncode, 0, result.stderr.decode('utf-8', errors='replace'))
+
 
 if __name__ == '__main__':
     unittest.main()
